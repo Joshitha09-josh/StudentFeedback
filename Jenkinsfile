@@ -11,25 +11,37 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                echo 'Cloning Student Feedback application'
+                echo 'Cloning Student Feedback application from GitHub'
+
                 checkout scm
             }
         }
 
+
         stage('Build Docker Image') {
             steps {
-                bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" build -t balaji00002/student-feedback:v1 .'
+
+                echo 'Building Student Feedback Docker image v2'
+
+                bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" build -t balaji00002/student-feedback:v2 .'
             }
         }
+
 
         stage('Test Application') {
             steps {
-                bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" images balaji00002/student-feedback:v1'
+
+                echo 'Testing Docker image'
+
+                bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" images balaji00002/student-feedback:v2'
             }
         }
 
+
         stage('Push Image') {
             steps {
+
+                echo 'Pushing Docker image v2 to Docker Hub'
 
                 withCredentials([
                     usernamePassword(
@@ -41,13 +53,16 @@ pipeline {
 
                     bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%'
 
-                    bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" push balaji00002/student-feedback:v1'
+                    bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" push balaji00002/student-feedback:v2'
                 }
             }
         }
 
+
         stage('Deploy to Kubernetes') {
             steps {
+
+                echo 'Deploying Student Feedback v2 to Kubernetes'
 
                 withCredentials([
                     file(
@@ -61,8 +76,11 @@ pipeline {
             }
         }
 
+
         stage('Verify Kubernetes') {
             steps {
+
+                echo 'Checking Kubernetes Deployment'
 
                 withCredentials([
                     file(
@@ -71,20 +89,25 @@ pipeline {
                     )
                 ]) {
 
-                    bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\kubectl.exe" get deployment'
+                    bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\kubectl.exe" get deployment student-feedback'
+
+                    echo 'Checking all three Student Feedback Pods'
 
                     bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\kubectl.exe" get pods'
 
-                    bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\kubectl.exe" get service'
+                    echo 'Checking Student Feedback NodePort Service'
+
+                    bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\kubectl.exe" get service student-feedback-service'
                 }
             }
         }
     }
 
+
     post {
 
         success {
-            echo 'Student Feedback CI/CD Pipeline completed successfully!'
+            echo 'Student Feedback v2 CI/CD Pipeline completed successfully!'
         }
 
         failure {

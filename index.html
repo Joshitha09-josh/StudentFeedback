@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,16 +17,18 @@
 
         .container {
             width: 500px;
+            max-width: 90%;
             margin: 40px auto;
             background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
             text-align: center;
             color: #1f4e79;
+            margin-bottom: 25px;
         }
 
         label {
@@ -41,10 +44,14 @@
             padding: 10px;
             margin-top: 5px;
             box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
         }
 
         textarea {
             height: 100px;
+            resize: vertical;
         }
 
         button {
@@ -56,54 +63,140 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
 
         button:hover {
             background: #163a5c;
+        }
+
+        #thankYou {
+            display: none;
+            margin-top: 25px;
+            padding: 15px;
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            text-align: center;
+            color: #2e7d32;
+        }
+
+        #thankYou h3 {
+            margin: 0 0 8px 0;
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h1>Student Feedback System</h1>
+        <h1>Student Feedback System</h1>
 
-    <form>
+        <form id="feedbackForm" onsubmit="showThankYou(event)">
 
-        <label>Course Name</label>
-        <input type="text" placeholder="Enter course name">
+            <label for="course">Course Name</label>
+            <input
+                type="text"
+                id="course"
+                name="course"
+                placeholder="Enter course name"
+                required
+            >
 
-        <label>Faculty Name</label>
-        <input type="text" placeholder="Enter faculty name">
+            <label for="faculty">Faculty Name</label>
+            <input
+                type="text"
+                id="faculty"
+                name="faculty"
+                placeholder="Enter faculty name"
+                required
+            >
 
-        <label>Student Name</label>
-        <input type="text" placeholder="Enter student name">
+            <label for="student">Student Name</label>
+            <input
+                type="text"
+                id="student"
+                name="student"
+                placeholder="Enter student name"
+                required
+            >
 
-        <label>Register Number</label>
-        <input type="text" placeholder="Enter register number">
+            <label for="register">Register Number</label>
+            <input
+                type="text"
+                id="register"
+                name="register"
+                placeholder="Enter register number"
+                required
+            >
 
-        <label>Department</label>
-        <input type="text" placeholder="Enter department">
+            <label for="department">Department</label>
+            <input
+                type="text"
+                id="department"
+                name="department"
+                placeholder="Enter department"
+                required
+            >
 
-        <label>Rating</label>
-        <select>
-            <option>Excellent - 5</option>
-            <option>Very Good - 4</option>
-            <option>Good - 3</option>
-            <option>Average - 2</option>
-            <option>Poor - 1</option>
-        </select>
+            <label for="rating">Rating</label>
+            <select id="rating" name="rating" required>
+                <option value="">Select Rating</option>
+                <option value="5">Excellent - 5</option>
+                <option value="4">Very Good - 4</option>
+                <option value="3">Good - 3</option>
+                <option value="2">Average - 2</option>
+                <option value="1">Poor - 1</option>
+            </select>
 
-        <label>Feedback / Comments</label>
-        <textarea placeholder="Enter your feedback"></textarea>
+            <label for="feedback">Feedback / Comments</label>
+            <textarea
+                id="feedback"
+                name="feedback"
+                placeholder="Enter your feedback"
+                required
+            ></textarea>
 
-        <button type="submit">Submit Feedback</button>
+            <button type="submit">
+                Submit Feedback
+            </button>
 
-    </form>
+        </form>
 
-</div>
+        <!-- New Feature Added in Version 2 -->
+        <div id="thankYou">
+
+            <h3>Thank You!</h3>
+
+            <p>
+                Your feedback has been submitted successfully.
+            </p>
+
+            <p>
+                We appreciate your valuable feedback.
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function showThankYou(event) {
+
+            // Prevent page refresh
+            event.preventDefault();
+
+            // Display the new Thank-You feature
+            document.getElementById("thankYou").style.display = "block";
+
+            // Hide the form after submission
+            document.getElementById("feedbackForm").style.display = "none";
+        }
+
+    </script>
 
 </body>
+
 </html>
