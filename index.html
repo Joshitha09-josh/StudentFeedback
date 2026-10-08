@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Feedback System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1f4e79;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #1f4e79;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #163a5c;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Feedback System</h1>
+
+    <form>
+
+        <label>Course Name</label>
+        <input type="text" placeholder="Enter course name">
+
+        <label>Faculty Name</label>
+        <input type="text" placeholder="Enter faculty name">
+
+        <label>Student Name</label>
+        <input type="text" placeholder="Enter student name">
+
+        <label>Register Number</label>
+        <input type="text" placeholder="Enter register number">
+
+        <label>Department</label>
+        <input type="text" placeholder="Enter department">
+
+        <label>Rating</label>
+        <select>
+            <option>Excellent - 5</option>
+            <option>Very Good - 4</option>
+            <option>Good - 3</option>
+            <option>Average - 2</option>
+            <option>Poor - 1</option>
+        </select>
+
+        <label>Feedback / Comments</label>
+        <textarea placeholder="Enter your feedback"></textarea>
+
+        <button type="submit">Submit Feedback</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
